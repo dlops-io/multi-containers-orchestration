@@ -32,6 +32,7 @@ zero-shot-re = "*"
 neo4j = "*"
 openpyxl = "*"
 elasticsearch = {extras = ["async"], version = "*"}
+celery = {extras = ["redis"], version = "*"}
 
 [requires]
 python_version = "3.8"

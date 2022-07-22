@@ -6,9 +6,15 @@ echo "Container is running!!!"
 worker() {
     celery -A worker.service worker --loglevel=debug -B "$@"
 }
+scheduler() {
+    celery -A worker.service scheduler --loglevel=debug -B "$@"
+}
 
 worker_production() {
     pipenv run celery -A worker.service worker --loglevel=info --concurrency=8
+}
+scheduler_production() {
+    pipenv run celery -A worker.service scheduler --loglevel=info --concurrency=8
 }
 
 

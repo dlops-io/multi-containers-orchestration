@@ -7,7 +7,7 @@ set -e
 export IMAGE_NAME="mco-worker-service"
 export BASE_DIR=$(pwd)
 export COMMON_DIR=$(dirname "$(pwd)")/common
-export DATABASE_URL=""
+export DATABASE_URL="postgres://test:welcome123@pg-mco-server:5432/pg-mco"
 export REDIS_URL="redis://mco-redis:6379/0"
 
 # Create the network if we don't have it yet
@@ -21,7 +21,8 @@ docker-compose run --rm \
 --volume "$BASE_DIR":/app \
 --volume "$COMMON_DIR/dataaccess":/app/dataaccess \
 --volume "$COMMON_DIR/datacollector":/app/datacollector \
---volume "$COMMON_DIR/datacollector":/app/auth \
+--volume "$COMMON_DIR/auth":/app/auth \
+--volume "$COMMON_DIR/taskqueue":/app/taskqueue \
 -e MODE=dev \
 -e DATABASE_URL=$DATABASE_URL \
 -e REDIS_URL=$REDIS_URL \
